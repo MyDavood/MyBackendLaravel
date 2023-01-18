@@ -1,0 +1,34 @@
+{
+    "name": "backend/laravel",
+    "description": "My Backend Laravel Package",
+    "autoload": {
+        "psr-4": {
+            "Backend\\Laravel\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "authors": [
+        {
+            "name": "Davood Jafari",
+            "email": "to.jafari@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "laravel/framework": "^9.0",
+        "morilog/jalali": "^3.4",
+        "spatie/laravel-query-builder": "^5.1",
+        "pragmarx/google2fa": "^8.0",
+        "inertiajs/inertia-laravel": "^0.6.9"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Backend\\Laravel\\ServiceProvider"
+            ]
+        }
+    },
+    "prefer-stable": true
+}
