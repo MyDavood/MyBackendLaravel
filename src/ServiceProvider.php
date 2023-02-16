@@ -12,7 +12,8 @@ class ServiceProvider extends BaseServiceProvider
         $this->publishes([
             __DIR__.'/../assets/fonts' => public_path('fonts'),
             __DIR__.'/../assets/js' => resource_path('js'),
-            __DIR__.'/../assets/lang' => resource_path('lang'),
+            __DIR__.'/../assets/lang/fa' => resource_path('lang/fa'),
+            __DIR__.'/../assets/lang/fa.json' => resource_path('lang/fa.json'),
             __DIR__.'/../assets/scss' => resource_path('scss'),
             __DIR__.'/../assets/HandleInertiaRequests.php' => app_path('Http/Middleware/HandleInertiaRequests.php'),
             __DIR__.'/../assets/views/app.blade.php' => resource_path('views/app.blade.php'),

@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^8.0",
-        "laravel/framework": "^9.0",
+        "laravel/framework": "^9.0|^10.0",
         "morilog/jalali": "^3.4",
         "spatie/laravel-query-builder": "^5.1",
         "pragmarx/google2fa": "^8.0",
