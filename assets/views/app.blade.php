@@ -21,6 +21,9 @@
 </head>
 <body>
 @inertia
+@if (app()->isLocal())
+    <script src="http://localhost:3000/browser-sync/browser-sync-client.js"></script>
+@endif
 <div id="modal-place"></div>
 <div id="loader-container"><div id="loader"></div><div class="loader-section section-left"></div><div class="loader-section section-right"></div></div>
 </body>

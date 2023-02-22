@@ -17,6 +17,7 @@ mix.browserSync({
   proxy: '127.0.0.1:8000',
   startPath: `/backend`,
   ui: false,
+  open: false,
   files: [
     'resources/views/**/*.php',
     'public/**/*.(js|css)',
