@@ -14,21 +14,24 @@ class BaseController extends Controller
         string $component,
         $dataTableClass,
         array $params = [],
+        bool $showForm = false,
         string $formComponent = null,
-        mixed $formItem = null,
+        array $formParams = [],
     ): Response
     {
         $dataTable = new $dataTableClass;
 
-        if ($formComponent != null) {
+        if ($showForm != null) {
             inertia()->share(['formComponent' => $formComponent]);
         }
 
         return inertia($component, [
             'searchFields' => fn() => $dataTable->searchFields(),
             'dataTable' => fn() => $dataTable,
-            'form' => fn() => $formComponent != null,
-            'formItem' => fn() => $formItem,
+            'form' => fn() => [
+                'show' => $showForm,
+                'params' => $formParams,
+            ],
             ...$params,
         ]);
     }
