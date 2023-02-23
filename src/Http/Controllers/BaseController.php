@@ -27,9 +27,9 @@ class BaseController extends Controller
         ];
 
         if ($showForm && $formComponent != null) {
-            inertia()->share(['formComponent' => $formComponent]);
             $inertiaParams['form'] = fn() => [
                 'show' => $showForm,
+                'component' => $formComponent,
                 'params' => $formParams,
             ];
         }
