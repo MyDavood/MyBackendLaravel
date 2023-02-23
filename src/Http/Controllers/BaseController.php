@@ -20,19 +20,20 @@ class BaseController extends Controller
     ): Response
     {
         $dataTable = new $dataTableClass;
-
-        if ($showForm != null) {
-            inertia()->share(['formComponent' => $formComponent]);
-        }
-
-        return inertia($component, [
+        $inertiaParams = [
             'searchFields' => fn() => $dataTable->searchFields(),
             'dataTable' => fn() => $dataTable,
-            'form' => fn() => [
+            ...$params,
+        ];
+
+        if ($showForm != null && $formComponent != null) {
+            inertia()->share(['formComponent' => $formComponent]);
+            $inertiaParams['form'] = fn() => [
                 'show' => $showForm,
                 'params' => $formParams,
-            ],
-            ...$params,
-        ]);
+            ];
+        }
+
+        return inertia($component, $inertiaParams);
     }
 }
