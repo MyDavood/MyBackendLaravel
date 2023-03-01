@@ -30,6 +30,13 @@ abstract class DataTableResource implements Arrayable
         return [];
     }
 
+    private function getVisibleHeaders(): array
+    {
+        return array_filter($this->headers(), function ($item) {
+            return $item->show;
+        });
+    }
+
     private function filterParams(): array
     {
         $request = request();
@@ -76,7 +83,7 @@ abstract class DataTableResource implements Arrayable
 
         return [
             'path' => $this->path,
-            'headers' => $this->headers(),
+            'headers' => $this->getVisibleHeaders(),
             'items' => $this->collection,
             'filterParams' => $this->filterParams(),
             'params' => $this->params(),

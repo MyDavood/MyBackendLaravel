@@ -11,6 +11,8 @@ class DataTableHeader implements JsonSerializable
     private string $alignment = "center";
     private bool $sortable = false;
 
+    private bool $show = true;
+
     private function __construct(
         public string $name
     ){}
@@ -65,6 +67,13 @@ class DataTableHeader implements JsonSerializable
     public function sortable(): DataTableHeader
     {
         $this->sortable = true;
+
+        return $this;
+    }
+
+    public function show(bool $show): DataTableHeader
+    {
+        $this->show = $show;
 
         return $this;
     }
