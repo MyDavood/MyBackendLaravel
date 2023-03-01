@@ -10,8 +10,7 @@ class DataTableHeader implements JsonSerializable
     private string $dir = "rtl";
     private string $alignment = "center";
     private bool $sortable = false;
-
-    private bool $show = true;
+    public bool $show = true;
 
     private function __construct(
         public string $name
