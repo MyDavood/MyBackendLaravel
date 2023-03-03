@@ -15,7 +15,6 @@ class BaseController extends Controller
         $dataTableClass,
         array $params = [],
         bool $showForm = false,
-        string $formComponent = null,
         array $formParams = [],
     ): Response
     {
@@ -26,10 +25,9 @@ class BaseController extends Controller
             ...$params,
         ];
 
-        if ($showForm && $formComponent != null) {
+        if ($showForm) {
             $inertiaParams['form'] = fn() => [
                 'show' => $showForm,
-                'component' => $formComponent,
                 'params' => $formParams,
             ];
         }
