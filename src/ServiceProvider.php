@@ -10,18 +10,18 @@ class ServiceProvider extends BaseServiceProvider
         JsonResource::withoutWrapping();
 
         $this->publishes([
-            __DIR__.'/../assets/fonts' => public_path('fonts'),
-            __DIR__.'/../assets/js' => resource_path('js'),
-            __DIR__.'/../assets/lang/fa' => resource_path('lang/fa'),
-            __DIR__.'/../assets/lang/fa.json' => resource_path('lang/fa.json'),
-            __DIR__.'/../assets/scss' => resource_path('scss'),
-            __DIR__.'/../assets/HandleInertiaRequests.php' => app_path('Http/Middleware/HandleInertiaRequests.php'),
-            __DIR__.'/../assets/views/app.blade.php' => resource_path('views/app.blade.php'),
-            __DIR__.'/../assets/views/backend.blade.php' => resource_path('views/backend.blade.php'),
-            __DIR__.'/../assets/.editorconfig' => base_path('.editorconfig'),
-            __DIR__.'/../assets/webpack.config.js' => base_path('webpack.config.js'),
-            __DIR__.'/../assets/webpack.mix.js' => base_path('webpack.mix.js'),
-            __DIR__.'/../assets/package.json' => base_path('package.json'),
+            __DIR__ . '/../stubs/js' => resource_path('js'),
+            __DIR__ . '/../stubs/lang/fa' => resource_path('lang/fa'),
+            __DIR__ . '/../stubs/lang/fa.json' => resource_path('lang/fa.json'),
+            __DIR__ . '/../stubs/scss' => resource_path('scss'),
+            __DIR__ . '/../stubs/HandleInertiaRequests.php' => app_path('Http/Middleware/HandleInertiaRequests.php'),
+            __DIR__ . '/../stubs/views/app.blade.php' => resource_path('views/app.blade.php'),
+            __DIR__ . '/../stubs/views/backend.blade.php' => resource_path('views/backend.blade.php'),
+            __DIR__ . '/../stubs/.editorconfig' => base_path('.editorconfig'),
+            __DIR__ . '/../stubs/vite.config.js' => base_path('vite.config.js'),
+            __DIR__ . '/../stubs/postcss.config.js' => base_path('postcss.config.js'),
+            __DIR__ . '/../stubs/package.json' => base_path('package.json'),
+            __DIR__ . '/../stubs/Modules' => app_path('Modules'),
         ], 'assets');
     }
 }
