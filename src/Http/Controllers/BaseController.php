@@ -3,13 +3,13 @@
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller;
 use Inertia\Response;
 
 class BaseController extends Controller
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
-
     public function inertiaDataTable(
         string $component,
         $dataTableClass,
@@ -33,5 +33,15 @@ class BaseController extends Controller
         }
 
         return inertia($component, $inertiaParams);
+    }
+
+    public function getBackTo(): ?string
+    {
+        return request()->input('backTo');
+    }
+
+    public function redirectTo(string $path): RedirectResponse
+    {
+        return redirect()->to($this->getBackTo() ?? $path);
     }
 }
