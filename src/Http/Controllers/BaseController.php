@@ -14,7 +14,7 @@ class BaseController extends Controller
         string $component,
         $dataTableClass,
         array $params = [],
-        bool $formComponent = null,
+        string $formComponent = null,
         array $formParams = [],
     ): Response
     {
