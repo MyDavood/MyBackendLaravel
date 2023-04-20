@@ -10,7 +10,7 @@ trait BasePolicy
         }
     }
 
-    public function can(User $user, $permission) {
-        return $user->hasPermission($this->group, $permission);
+    public function can(User $user, $permission, $group = null) {
+        return $user->hasPermission($group ?? $this->group, $permission);
     }
 }
