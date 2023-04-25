@@ -10,12 +10,36 @@ class ModuleServiceProvider extends ServiceProvider
     public function addPermissionGroup(array $permissions)
     {
         if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
-            $current = config('auth.permissions');
+            $current = config('backend.permissions');
             if ($current == null) {
                 $current = [];
             }
             $current[] = $permissions;
-            config(['auth.permissions' => $current]);
+            config(['backend.permissions' => $current]);
+        }
+    }
+
+    public function addApiRoute(string $name, int $version, string $class): void
+    {
+        if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
+            $current = config('backend.apis');
+            if ($current == null) {
+                $current = [];
+            }
+            $current[$name][$version] = $class;
+            config(['backend.apis' => $current]);
+        }
+    }
+
+    public function addApiRoutes(string $name, array $versions): void
+    {
+        if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
+            $current = config('backend.apis');
+            if ($current == null) {
+                $current = [];
+            }
+            $current[$name] = $current[$name] + $versions;
+            config(['backend.apis' => $current]);
         }
     }
 }

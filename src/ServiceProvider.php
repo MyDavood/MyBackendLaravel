@@ -1,6 +1,8 @@
 <?php namespace Backend\Laravel;
 
+use Backend\Laravel\Http\Controllers\ApiAction;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
@@ -23,5 +25,15 @@ class ServiceProvider extends BaseServiceProvider
             __DIR__ . '/../stubs/package.json' => base_path('package.json'),
             __DIR__ . '/../stubs/Modules' => app_path('Modules'),
         ], 'assets');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/backend.php', 'backend');
+
+        Route::macro('apiGet', function ($path) {
+            return Route::get($path, ApiAction::class);
+        });
+
+        Route::macro('apiPost', function ($path) {
+            return Route::post($path, ApiAction::class);
+        });
     }
 }
