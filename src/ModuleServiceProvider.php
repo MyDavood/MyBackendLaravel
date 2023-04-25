@@ -38,7 +38,7 @@ class ModuleServiceProvider extends ServiceProvider
             if ($current == null) {
                 $current = [];
             }
-            $current[$name] = $current[$name] + $versions;
+            $current[$name] = ($current[$name] ?? []) + $versions;
             config(['backend.apis' => $current]);
         }
     }
