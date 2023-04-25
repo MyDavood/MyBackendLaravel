@@ -34,12 +34,12 @@ class ModuleServiceProvider extends ServiceProvider
     public function addApiRoutes(string $name, array $versions): void
     {
         if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
-            $current = config('backend.apis');
-            if ($current == null) {
-                $current = [];
-            }
-            $current[$name] = ($current[$name] ?? []) + $versions;
-            config(['backend.apis' => $current]);
+            $current = config("backend.apis.$name", []);
+            $current= [
+                ...$current,
+                ...$versions,
+            ];
+            config(["backend.apis.$name" => $current]);
         }
     }
 }
