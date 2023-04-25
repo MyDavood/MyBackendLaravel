@@ -35,10 +35,7 @@ class ModuleServiceProvider extends ServiceProvider
     {
         if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
             $current = config("backend.apis.$name", []);
-            $current= [
-                ...$current,
-                ...$versions,
-            ];
+            $current = $current + $versions;
             config(["backend.apis.$name" => $current]);
         }
     }
