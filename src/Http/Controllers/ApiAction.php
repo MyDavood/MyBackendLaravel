@@ -6,23 +6,17 @@ use Illuminate\Http\Request;
 
 class ApiAction
 {
-    private int $version;
-
-    public function __construct(Request $request)
-    {
-        $this->version = intval($request->get('v', 1));
-    }
-
     public function __invoke(Request $request)
     {
-        $versions = config('backend.apis.' . $request->route()->getName());
+        $versions = config('backend.apis')[$request->route()->getName()];
         $controller = null;
+        $version = $request->route()->parameter('v');
 
         if (is_array($versions)) {
             ksort($versions);
 
             foreach ($versions as $v => $c) {
-                if ($this->version >= $v) {
+                if ($version >= $v) {
                     $controller = $c;
                 }
             }
@@ -34,7 +28,9 @@ class ApiAction
             abort(404);
         }
         $controller = app()->make($controller);
+        $parameters = $request->route()->parameters();
+        array_shift($parameters);
 
-        return app()->call($controller, $request->route()->parameters());
+        return app()->call($controller, $parameters);
     }
 }

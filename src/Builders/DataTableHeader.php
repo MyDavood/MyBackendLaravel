@@ -1,82 +1,46 @@
-<?php namespace Backend\Laravel\Builders;
+<?php
 
+namespace Backend\Laravel\Builders;
+
+use Backend\Laravel\Enum\Alignment;
+use Backend\Laravel\Enum\Dir;
 use JsonSerializable;
 
 class DataTableHeader implements JsonSerializable
 {
-    private string $label;
-    private int $width = 0;
-    private int $minWidth = 0;
-    private string $dir = "rtl";
-    private string $alignment = "center";
-    private bool $sortable = false;
-    public bool $show = true;
-
     private function __construct(
-        public string $name
-    ){}
-
-    public static function make(string $name): DataTableHeader
-    {
-        return new static($name);
+        public string $name,
+        public string $label,
+        public int $width = 0,
+        public int $minWidth = 0,
+        public Dir $dir = Dir::RTL,
+        public Alignment $alignment = Alignment::CENTER,
+        public bool $sortable = false,
+        public bool $show = true,
+    ) {
     }
 
-    public function label(string $label): DataTableHeader
-    {
-        $this->label = $label;
-
-        return $this;
+    public static function make(
+        string $name,
+        string $label,
+        int $width = 0,
+        int $minWidth = 0,
+        string $dir = 'rtl',
+        string $alignment = 'center',
+        bool $sortable = false,
+        bool $show = true,
+    ): DataTableHeader {
+        return new static(
+            name: $name,
+            label: $label,
+            width: $width,
+            minWidth: $minWidth,
+            dir: $dir,
+            alignment: $alignment,
+            sortable: $sortable,
+            show: $show,
+        );
     }
-
-    public function width(int $width): DataTableHeader
-    {
-        $this->width = $width;
-
-        return $this;
-    }
-
-    public function minWidth(int $minWidth): DataTableHeader
-    {
-        $this->minWidth = $minWidth;
-
-        return $this;
-    }
-
-    public function isLTR(): DataTableHeader
-    {
-        $this->dir = "ltr";
-
-        return $this;
-    }
-
-    public function isLeftAlign(): DataTableHeader
-    {
-        $this->alignment = "left";
-
-        return $this;
-    }
-
-    public function isRightAlign(): DataTableHeader
-    {
-        $this->alignment = "right";
-
-        return $this;
-    }
-
-    public function sortable(): DataTableHeader
-    {
-        $this->sortable = true;
-
-        return $this;
-    }
-
-    public function show(bool $show): DataTableHeader
-    {
-        $this->show = $show;
-
-        return $this;
-    }
-
 
     public function jsonSerialize(): array
     {
@@ -86,8 +50,8 @@ class DataTableHeader implements JsonSerializable
             'sortable' => $this->sortable,
             'minWidth' => $this->minWidth,
             'width' => $this->width,
-            'dir' => $this->dir,
-            'align' => $this->alignment,
+            'dir' => $this->dir->value,
+            'align' => $this->alignment->value,
         ];
     }
 }

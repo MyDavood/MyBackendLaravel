@@ -1,4 +1,6 @@
-<?php namespace App\Http\Resources;
+<?php
+
+namespace Backend\Laravel\Resources;
 
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Arrayable;
@@ -11,8 +13,7 @@ class PaginatedData implements Arrayable
     public function __construct(
         public LengthAwarePaginator $items,
         public string $collects,
-    )
-    {
+    ) {
     }
 
     public function toArray(): array

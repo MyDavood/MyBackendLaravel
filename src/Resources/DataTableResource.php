@@ -1,5 +1,8 @@
-<?php namespace Backend\Laravel\Resources;
+<?php
 
+namespace Backend\Laravel\Resources;
+
+use Backend\Laravel\Builders\DataTableHeader;
 use Backend\Laravel\Builders\DataTableSearchField;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Support\Arrayable;
@@ -10,16 +13,21 @@ abstract class DataTableResource implements Arrayable
     use CollectsResources;
 
     public string $collects;
+
     public string $path;
-    public string $defaultSort = "created_at";
+
+    public string $defaultSort = 'created_at';
+
     protected array $allowedParams = [];
 
     public function __construct(
         public LengthAwarePaginator $items
-    )
-    {
+    ) {
     }
 
+    /**
+     * @return DataTableHeader[]
+     */
     abstract public function headers(): array;
 
     /**
@@ -49,7 +57,7 @@ abstract class DataTableResource implements Arrayable
                 if ($field->isNumber) {
                     $params[$field->name] = intval($params[$field->name]);
                 }
-            } else if($field->defaultValue != null) {
+            } elseif ($field->defaultValue != null) {
                 $params[$field->name] = urldecode($field->defaultValue);
                 if ($field->isNumber) {
                     $params[$field->name] = intval($params[$field->name]);
@@ -74,6 +82,7 @@ abstract class DataTableResource implements Arrayable
                 }
             }
         }
+
         return $params;
     }
 

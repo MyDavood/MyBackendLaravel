@@ -1,4 +1,6 @@
-<?php namespace Backend\Laravel;
+<?php
+
+namespace Backend\Laravel;
 
 use Illuminate\Contracts\Foundation\CachesConfiguration;
 use Illuminate\Support\ServiceProvider;
@@ -7,7 +9,7 @@ class ModuleServiceProvider extends ServiceProvider
 {
     protected array $permissions = [];
 
-    public function addPermissionGroup(array $permissions)
+    public function addPermissionGroup(array $permissions): void
     {
         if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
             $current = config('backend.permissions');
@@ -22,10 +24,7 @@ class ModuleServiceProvider extends ServiceProvider
     public function addApiRoute(string $name, int $version, string $class): void
     {
         if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
-            $current = config('backend.apis');
-            if ($current == null) {
-                $current = [];
-            }
+            $current = config('backend.apis', []);
             $current[$name][$version] = $class;
             config(['backend.apis' => $current]);
         }
@@ -34,9 +33,9 @@ class ModuleServiceProvider extends ServiceProvider
     public function addApiRoutes(string $name, array $versions): void
     {
         if (! ($this->app instanceof CachesConfiguration && $this->app->configurationIsCached())) {
-            $current = config("backend.apis.$name", []);
-            $current = $current + $versions;
-            config(["backend.apis.$name" => $current]);
+            $current = config('backend.apis', []);
+            $current[$name] = $current[$name] + $versions;
+            config(['backend.apis' => $current]);
         }
     }
 }

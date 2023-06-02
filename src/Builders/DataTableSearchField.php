@@ -1,59 +1,34 @@
-<?php namespace Backend\Laravel\Builders;
+<?php
+
+namespace Backend\Laravel\Builders;
 
 use JsonSerializable;
 
 class DataTableSearchField implements JsonSerializable
 {
-    private string $label;
-    private array $items;
-    public bool $isNumber = false;
-    private bool $isDropDown = false;
-    public mixed $defaultValue = null;
-
     private function __construct(
-        public string $name
-    )
-    {
+        public string $name,
+        public string $label,
+        public bool $isNumber = false,
+        public array $dropDownItems = [],
+        public mixed $defaultValue = null,
+    ) {
     }
 
-    public static function make(string $name): DataTableSearchField
-    {
-        return new static($name);
-    }
-
-    public function label(string $label): DataTableSearchField
-    {
-        $this->label = $label;
-
-        return $this;
-    }
-
-    public function isNumber(): DataTableSearchField
-    {
-        $this->isNumber = true;
-
-        return $this;
-    }
-
-    public function input(): DataTableSearchField
-    {
-        $this->isDropDown = false;
-
-        return $this;
-    }
-
-    public function dropDown(array $items): DataTableSearchField
-    {
-        $this->items = $items;
-        $this->isDropDown = true;
-
-        return $this;
-    }
-
-    public function defaultValue($value): DataTableSearchField {
-        $this->defaultValue = $value;
-
-        return $this;
+    public static function make(
+        string $name,
+        string $label,
+        bool $isNumber = false,
+        array $dropDownItems = [],
+        mixed $defaultValue = null,
+    ): DataTableSearchField {
+        return new static(
+            name: $name,
+            label: $label,
+            isNumber: $isNumber,
+            dropDownItems: $dropDownItems,
+            defaultValue: $defaultValue,
+        );
     }
 
     public function jsonSerialize(): mixed
@@ -64,8 +39,8 @@ class DataTableSearchField implements JsonSerializable
             'number' => $this->isNumber,
         ];
 
-        if ($this->isDropDown) {
-            $result['items'] = $this->items;
+        if (count($this->dropDownItems) > 0) {
+            $result['items'] = $this->dropDownItems;
         }
 
         return $result;
