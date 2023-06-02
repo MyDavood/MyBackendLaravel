@@ -11,12 +11,12 @@ class DataTableHeader implements JsonSerializable
     private function __construct(
         public string $name,
         public string $label,
-        public int $width = 0,
-        public int $minWidth = 0,
-        public Dir $dir = Dir::RTL,
-        public Alignment $alignment = Alignment::CENTER,
-        public bool $sortable = false,
-        public bool $show = true,
+        public int $width,
+        public int $minWidth,
+        public Dir $dir,
+        public Alignment $alignment,
+        public bool $sortable,
+        public bool $show,
     ) {
     }
 
@@ -25,8 +25,8 @@ class DataTableHeader implements JsonSerializable
         string $label,
         int $width = 0,
         int $minWidth = 0,
-        string $dir = 'rtl',
-        string $alignment = 'center',
+        Dir $dir = Dir::RTL,
+        Alignment $alignment = Alignment::CENTER,
         bool $sortable = false,
         bool $show = true,
     ): DataTableHeader {

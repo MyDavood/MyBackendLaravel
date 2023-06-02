@@ -9,9 +9,9 @@ class DataTableSearchField implements JsonSerializable
     private function __construct(
         public string $name,
         public string $label,
-        public bool $isNumber = false,
-        public array $dropDownItems = [],
-        public mixed $defaultValue = null,
+        public bool $isNumber,
+        public array $dropDownItems,
+        public mixed $defaultValue,
     ) {
     }
 
